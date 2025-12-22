@@ -6,7 +6,6 @@
     <title>Green street Builders</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <script>
@@ -57,7 +56,6 @@
   </head>
   <body class="bg-white text-gray-900 font-sans selection:bg-greenstreet-200 selection:text-greenstreet-900">
     
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 transition-all duration-300">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
@@ -85,7 +83,6 @@
         </div>
       </div>
 
-      <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full">
         <div class="px-4 pt-2 pb-6 space-y-2">
           <button onclick="scrollToSection('buyers')" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg">Home Buyers</button>
@@ -96,7 +93,6 @@
       </div>
     </nav>
 
-    <!-- Admin Toolbar -->
     <div class="fixed top-24 left-4 z-40 hidden lg:block">
       <button id="admin-toggle-btn" class="text-xs text-gray-300 hover:text-greenstreet-600 transition-colors">
         Show AI Tools
@@ -112,16 +108,12 @@
         Regenerate site copy instantly using Gemini 2.5 Flash.
       </p>
       <div class="space-y-2" id="admin-buttons">
-        <!-- Buttons injected by JS -->
-      </div>
+        </div>
     </div>
 
-    <!-- MAIN CONTENT WRAPPER -->
     <main id="main-content">
       
-      <!-- LANDING PAGE VIEW -->
       <div id="landing-view">
-        <!-- Hero Section -->
         <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-greenstreet-50">
           <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-greenstreet-200 rounded-full blur-3xl opacity-30"></div>
           <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-greenstreet-300 rounded-full blur-3xl opacity-30"></div>
@@ -149,7 +141,6 @@
           </div>
         </section>
 
-        <!-- Value Props -->
         <section class="py-20 bg-white">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -157,24 +148,23 @@
               <p id="props-subheadline" class="text-lg text-gray-600 max-w-2xl mx-auto">Why homeowners and land sellers trust us.</p>
             </div>
             <div id="props-grid" class="grid md:grid-cols-3 gap-8">
-              <!-- Default Content -->
               <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="w-12 h-12 bg-greenstreet-100 rounded-xl flex items-center justify-center text-greenstreet-600 mb-6">
-                   <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                    <i data-lucide="check-circle-2" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Quality Controlled Construction</h3>
                 <p class="text-gray-600">Rigorous standards for every build.</p>
               </div>
               <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="w-12 h-12 bg-greenstreet-100 rounded-xl flex items-center justify-center text-greenstreet-600 mb-6">
-                   <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                    <i data-lucide="dollar-sign" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Predictable Pricing</h3>
                 <p class="text-gray-600">No hidden costs, just exceptional value.</p>
               </div>
               <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
                 <div class="w-12 h-12 bg-greenstreet-100 rounded-xl flex items-center justify-center text-greenstreet-600 mb-6">
-                   <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">Prime Locations</h3>
                 <p class="text-gray-600">We build where you want to live.</p>
@@ -183,12 +173,11 @@
           </div>
         </section>
 
-        <!-- Buyer Section -->
         <section id="buyers" class="py-24 bg-gray-50">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
               <div class="mb-12 lg:mb-0">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Modern Infill Home" class="rounded-2xl shadow-2xl object-cover h-full w-full grayscale-[10%] hover:grayscale-0 transition-all duration-700">
+                <img src="images/Green Street Builders House.png" alt="Modern Infill Home" class="rounded-2xl shadow-2xl object-cover h-full w-full grayscale-[10%] hover:grayscale-0 transition-all duration-700">
               </div>
               <div>
                 <div class="inline-flex items-center gap-2 text-greenstreet-600 font-bold tracking-wide uppercase text-sm mb-4">
@@ -215,8 +204,8 @@
                 </div>
 
                 <div class="bg-white p-6 rounded-xl border border-gray-100 mb-8">
-                   <h4 class="font-bold text-gray-900 mb-4 border-b pb-2">Simple 3-Step Process</h4>
-                   <div class="flex justify-between text-sm text-center">
+                    <h4 class="font-bold text-gray-900 mb-4 border-b pb-2">Simple 3-Step Process</h4>
+                    <div class="flex justify-between text-sm text-center">
                       <div class="flex-1 px-2">
                           <div class="font-bold text-greenstreet-600 text-lg mb-1">01</div>
                           <div class="leading-tight text-gray-600">Choose Lot & Plan</div>
@@ -229,7 +218,7 @@
                           <div class="font-bold text-greenstreet-600 text-lg mb-1">03</div>
                           <div class="leading-tight text-gray-600">Close & Move In</div>
                       </div>
-                   </div>
+                    </div>
                 </div>
 
                 <button id="buyer-cta" onclick="window.switchView('listings')" class="px-8 py-3 bg-greenstreet-800 text-white rounded-lg font-semibold hover:bg-greenstreet-900 transition-colors w-full sm:w-auto">
@@ -240,7 +229,6 @@
           </div>
         </section>
 
-        <!-- Seller Section -->
         <section id="sellers" class="py-24 bg-greenstreet-900 text-white relative overflow-hidden">
           <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -255,18 +243,18 @@
                 </p>
 
                 <div id="seller-points" class="space-y-6 mb-10">
-                   <div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
+                    <div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
                       <div class="bg-greenstreet-500 p-2 rounded-full"><i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i></div>
                       <span class="font-medium text-lg">Direct Cash Offer: Competitive pricing based on market value.</span>
-                   </div>
-                   <div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
                       <div class="bg-greenstreet-500 p-2 rounded-full"><i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i></div>
                       <span class="font-medium text-lg">We Buy As-Is: No clearing, grading, or repairs needed.</span>
-                   </div>
-                   <div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors">
                       <div class="bg-greenstreet-500 p-2 rounded-full"><i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i></div>
                       <span class="font-medium text-lg">Fast Closing: No agent commissions, no waiting.</span>
-                   </div>
+                    </div>
                 </div>
                 
                 <div class="flex gap-4">
@@ -284,7 +272,6 @@
 
               </div>
               
-              <!-- Seller Form Mockup -->
               <div class="bg-white text-gray-900 p-8 rounded-2xl shadow-2xl">
                 <h3 class="text-2xl font-bold mb-2">Get Your Offer</h3>
                 <p class="text-gray-500 mb-6 text-sm">Fill out the form below. Your privacy is guaranteed.</p>
@@ -295,14 +282,14 @@
                     <input type="text" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:outline-none focus:bg-white" placeholder="123 Main St" required />
                   </div>
                   <div class="grid grid-cols-2 gap-4">
-                     <div>
+                      <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
                         <input type="text" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:outline-none focus:bg-white" placeholder="John" />
-                     </div>
-                     <div>
+                      </div>
+                      <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
                         <input type="text" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:outline-none focus:bg-white" placeholder="Doe" />
-                     </div>
+                      </div>
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -320,55 +307,44 @@
             </div>
           </div>
         </section>
-      </div> <!-- End Landing View -->
-
-      <!-- LISTINGS VIEW (Hidden by default) -->
-      <div id="listings-view" class="hidden pt-28 pb-24 bg-gray-50 min-h-screen">
+      </div> <div id="listings-view" class="hidden pt-28 pb-24 bg-gray-50 min-h-screen">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-             
-             <!-- Navigation Breadcrumb -->
-             <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
+              
+              <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
                 <button onclick="window.switchView('landing')" class="hover:text-greenstreet-600 flex items-center gap-1">
                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
                 </button>
                 <span>/</span>
                 <span class="text-gray-900 font-medium">Inventory</span>
-             </div>
+              </div>
 
-             <!-- Header -->
-             <div class="text-center mb-12">
+              <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Current Inventory</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore our selection of move-in ready homes, properties under construction, and our library of buildable floor plans.</p>
-             </div>
-             
-             <!-- Filters -->
-             <div class="flex flex-wrap justify-center gap-4 mb-12">
+              </div>
+              
+              <div class="flex flex-wrap justify-center gap-4 mb-12">
                 <button onclick="filterListings('all')" id="filter-all" class="filter-btn active px-6 py-2 rounded-full bg-greenstreet-600 text-white font-medium transition-colors shadow-sm">All Properties</button>
                 <button onclick="filterListings('ready')" id="filter-ready" class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-colors shadow-sm">Move-In Ready</button>
                 <button onclick="filterListings('construction')" id="filter-construction" class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-colors shadow-sm">Under Construction</button>
                 <button onclick="filterListings('plan')" id="filter-plan" class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-colors shadow-sm">Floor Plans</button>
-             </div>
+              </div>
         
-             <!-- Grid -->
-             <div id="listings-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- JS Injected -->
-             </div>
-             
-             <!-- Empty State (Hidden) -->
-             <div id="listings-empty" class="hidden text-center py-20">
+              <div id="listings-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+              
+              <div id="listings-empty" class="hidden text-center py-20">
                 <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
                     <i data-lucide="search" class="w-8 h-8"></i>
                 </div>
                 <h3 class="text-lg font-bold text-gray-900">No properties found</h3>
                 <p class="text-gray-500">Try adjusting your filters.</p>
-             </div>
+              </div>
           </div>
       </div>
 
-      <!-- PROPERTY DETAIL VIEW (Hidden by default) -->
       <div id="detail-view" class="hidden pt-28 pb-24 bg-white min-h-screen">
          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Breadcrumb -->
             <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
                <button onclick="window.switchView('listings')" class="hover:text-greenstreet-600 flex items-center gap-1">
                   <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Inventory
@@ -378,7 +354,6 @@
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
-               <!-- Images -->
                <div class="space-y-4">
                   <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] group">
                      <img id="detail-main-image" src="" alt="Property" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
@@ -387,11 +362,9 @@
                      </div>
                   </div>
                   <div class="grid grid-cols-4 gap-4" id="detail-gallery">
-                     <!-- JS Injected Thumbnails -->
-                  </div>
+                     </div>
                </div>
 
-               <!-- Info -->
                <div>
                   <h1 id="detail-title" class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mt-2 mb-2">Title</h1>
                   <p id="detail-address" class="text-lg text-gray-600 mb-6 flex items-center gap-2">
@@ -419,13 +392,12 @@
 
                   <h3 class="font-bold text-gray-900 mb-3 text-lg">About this home</h3>
                   <p id="detail-description" class="text-gray-600 leading-relaxed mb-8">
-                     Description goes here.
+                      Description goes here.
                   </p>
 
                   <h3 class="font-bold text-gray-900 mb-4 text-lg">Key Features</h3>
                   <ul id="detail-features" class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 mb-10">
-                     <!-- JS Injected -->
-                  </ul>
+                      </ul>
 
                   <div class="bg-greenstreet-50 p-8 rounded-2xl border border-greenstreet-100 text-center">
                      <h3 class="font-serif font-bold text-2xl text-gray-900 mb-2">Interested in this property?</h3>
@@ -445,7 +417,6 @@
       </div>
     </main>
 
-    <!-- Footer -->
     <footer id="contact" class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-4 gap-8">
@@ -500,9 +471,7 @@
       </div>
     </footer>
 
-    <!-- Chat Widget -->
     <div id="chat-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-        <!-- Chat Box -->
         <div id="chat-box" class="mb-4 w-80 sm:w-96 bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200 flex flex-col h-[500px] transition-all duration-300 ease-in-out hidden">
             <div class="bg-greenstreet-800 p-4 flex justify-between items-center">
                 <div>
@@ -515,8 +484,7 @@
             </div>
             
             <div id="chat-messages" class="flex-1 overflow-y-auto p-4 bg-gray-50 space-y-4">
-                <!-- Messages go here -->
-            </div>
+                </div>
 
             <div class="p-4 bg-white border-t border-gray-100">
                 <div class="flex items-center gap-2">
@@ -536,7 +504,6 @@
             </div>
         </div>
 
-        <!-- Toggle Button -->
         <button
             id="chat-toggle-btn"
             class="p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 bg-greenstreet-600 text-white hover:bg-greenstreet-700"
@@ -546,7 +513,6 @@
         </button>
     </div>
 
-    <!-- Application Logic -->
     <script type="module">
         import { GoogleGenAI, Type } from "@google/genai";
 
@@ -843,7 +809,7 @@
             // Badge
             const badge = document.getElementById('detail-badge');
             const typeLabel = item.type === 'ready' ? 'Move-In Ready' : 
-                                 item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
+                                                 item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
             badge.textContent = typeLabel;
             badge.className = `absolute top-4 left-4 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm ${item.badgeColor}`;
 
@@ -895,45 +861,45 @@
 
             filtered.forEach(item => {
                 const typeLabel = item.type === 'ready' ? 'Move-In Ready' : 
-                                 item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
+                                                 item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
                 
                 const card = document.createElement('div');
                 card.className = "group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden";
                 card.innerHTML = `
-                   <div class="relative h-64 overflow-hidden">
-                       <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                       <div class="absolute top-4 left-4 ${item.badgeColor} text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm">
-                           ${typeLabel}
-                       </div>
-                   </div>
-                   <div class="p-6 flex-1 flex flex-col">
-                       <div class="mb-4">
-                           <h3 class="text-2xl font-bold text-greenstreet-800">${item.price}</h3>
-                           <p class="text-lg font-bold text-gray-900">${item.title}</p>
-                           <p class="text-sm text-gray-500">${item.address}</p>
-                       </div>
-                       
-                       <div class="flex items-center gap-4 mb-4 text-sm text-gray-600 border-t border-b border-gray-50 py-3">
-                           <div class="flex items-center gap-1.5">
-                               <i data-lucide="bed-double" class="w-4 h-4 text-greenstreet-500"></i>
-                               <span><strong>${item.beds}</strong> Beds</span>
-                           </div>
-                           <div class="flex items-center gap-1.5">
-                               <i data-lucide="bath" class="w-4 h-4 text-greenstreet-500"></i>
-                               <span><strong>${item.baths}</strong> Baths</span>
-                           </div>
-                           <div class="flex items-center gap-1.5">
-                               <i data-lucide="ruler" class="w-4 h-4 text-greenstreet-500"></i>
-                               <span><strong>${item.sqft}</strong> Sqft</span>
-                           </div>
-                       </div>
-                       
-                       <p class="text-gray-500 text-sm line-clamp-2 mb-6 flex-1">${item.description}</p>
-                       
-                       <button onclick="window.openListingDetail(${item.id})" class="w-full py-3 bg-gray-50 hover:bg-greenstreet-50 text-greenstreet-800 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 group-hover:bg-greenstreet-600 group-hover:text-white">
-                           View Details
-                       </button>
-                   </div>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 ${item.badgeColor} text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm">
+                            ${typeLabel}
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="mb-4">
+                            <h3 class="text-2xl font-bold text-greenstreet-800">${item.price}</h3>
+                            <p class="text-lg font-bold text-gray-900">${item.title}</p>
+                            <p class="text-sm text-gray-500">${item.address}</p>
+                        </div>
+                        
+                        <div class="flex items-center gap-4 mb-4 text-sm text-gray-600 border-t border-b border-gray-50 py-3">
+                            <div class="flex items-center gap-1.5">
+                                <i data-lucide="bed-double" class="w-4 h-4 text-greenstreet-500"></i>
+                                <span><strong>${item.beds}</strong> Beds</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <i data-lucide="bath" class="w-4 h-4 text-greenstreet-500"></i>
+                                <span><strong>${item.baths}</strong> Baths</span>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <i data-lucide="ruler" class="w-4 h-4 text-greenstreet-500"></i>
+                                <span><strong>${item.sqft}</strong> Sqft</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-500 text-sm line-clamp-2 mb-6 flex-1">${item.description}</p>
+                        
+                        <button onclick="window.openListingDetail(${item.id})" class="w-full py-3 bg-gray-50 hover:bg-greenstreet-50 text-greenstreet-800 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 group-hover:bg-greenstreet-600 group-hover:text-white">
+                            View Details
+                        </button>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
@@ -971,7 +937,7 @@
                 div.className = "p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow";
                 div.innerHTML = `
                     <div class="w-12 h-12 bg-greenstreet-100 rounded-xl flex items-center justify-center text-greenstreet-600 mb-6">
-                       <i data-lucide="${iconName}" class="w-6 h-6"></i>
+                        <i data-lucide="${iconName}" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">${title}</h3>
                     <p class="text-gray-600">${desc}</p>
