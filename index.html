@@ -1,843 +1,968 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Greenstreet Builders</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            colors: {
-              greenstreet: {
-                50: '#f2f7f4',
-                100: '#e1efe6',
-                200: '#c5dfcd',
-                300: '#9cc5aa',
-                400: '#70a483',
-                500: '#4d8763',
-                600: '#3a6b4d',
-                700: '#2f553e',
-                800: '#284433',
-                900: '#21382b',
-              }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greenstreet Builders</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            greenstreet: {
+              50: '#f2f7f4',
+              100: '#e1efe6',
+              200: '#c5dfcd',
+              300: '#9cc5aa',
+              400: '#70a483',
+              500: '#4d8763',
+              600: '#3a6b4d',
+              700: '#2f553e',
+              800: '#284433',
+              900: '#21382b',
             }
           }
         }
       }
-    </script>
-    <style>
-      html { scroll-behavior: smooth; }
-      body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-      
-      .line-clamp-2 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-      /* Explicit Keyframes for Animation */
-      @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-      @keyframes fadeInView {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-      /* Scroll Reveal Classes */
-      .reveal-on-scroll {
+    /* Explicit Keyframes for Animation */
+    @keyframes fadeInUp {
+      from {
         opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
+        transform: translateY(20px);
       }
-      .reveal-visible {
+
+      to {
         opacity: 1;
         transform: translateY(0);
       }
-      .delay-100 { transition-delay: 100ms; }
-      .delay-200 { transition-delay: 200ms; }
-      .delay-300 { transition-delay: 300ms; }
+    }
 
-      /* Hero Animation Utilities */
-      .hero-animate {
-        opacity: 0; /* Starts hidden */
-        animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-      .hero-delay-1 { animation-delay: 0.1s; }
-      .hero-delay-2 { animation-delay: 0.3s; }
-      .hero-delay-3 { animation-delay: 0.5s; }
-
-      /* View Transitions */
-      .view-container {
+    @keyframes fadeInView {
+      from {
         opacity: 0;
-        animation: fadeInView 0.5s ease-out forwards;
+        transform: translateY(10px);
       }
-    </style>
-  </head>
-  <body class="bg-white text-gray-900 font-sans selection:bg-greenstreet-200 selection:text-greenstreet-900">
-    
-    <nav id="main-nav" class="fixed w-full z-50 bg-white/95 backdrop-blur-md transition-all duration-300 border-b border-transparent">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-          <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="window.switchView('landing'); window.scrollTo(0,0)">
-            <div class="h-8 w-8 bg-greenstreet-600 rounded-sm mr-2 flex items-center justify-center transition-transform duration-300 group-hover:rotate-3">
-              <span class="text-white font-serif font-bold text-xl">G</span>
-            </div>
-            <span class="font-serif font-bold text-xl text-greenstreet-900 tracking-tight">GREENSTREET</span>
-          </div>
-          
-          <div class="hidden md:flex space-x-8 items-center">
-            <button onclick="scrollToSection('buyers')" class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
-                Home Buyers
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-            <button onclick="scrollToSection('sellers')" class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
-                Lot Sellers
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-             <button onclick="window.switchView('listings')" class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
-                Inventory
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-            <button onclick="scrollToSection('contact')" class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
-                Contact
-                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-            <button onclick="window.switchView('listings')" class="bg-greenstreet-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-greenstreet-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
-              Find a Home
-            </button>
-          </div>
 
-          <div class="md:hidden flex items-center">
-            <button id="mobile-menu-btn" class="text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <i data-lucide="menu"></i>
-            </button>
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll Reveal Classes */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-100 {
+      transition-delay: 100ms;
+    }
+
+    .delay-200 {
+      transition-delay: 200ms;
+    }
+
+    .delay-300 {
+      transition-delay: 300ms;
+    }
+
+    /* Hero Animation Utilities */
+    .hero-animate {
+      opacity: 0;
+      /* Starts hidden */
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .hero-delay-2 {
+      animation-delay: 0.3s;
+    }
+
+    .hero-delay-3 {
+      animation-delay: 0.5s;
+    }
+
+    /* View Transitions */
+    .view-container {
+      opacity: 0;
+      animation: fadeInView 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-900 font-sans selection:bg-greenstreet-200 selection:text-greenstreet-900">
+
+  <nav id="main-nav"
+    class="fixed w-full z-50 bg-white/95 backdrop-blur-md transition-all duration-300 border-b border-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex-shrink-0 flex items-center cursor-pointer group"
+          onclick="window.switchView('landing'); window.scrollTo(0,0)">
+          <div
+            class="h-8 w-8 bg-greenstreet-600 rounded-sm mr-2 flex items-center justify-center transition-transform duration-300 group-hover:rotate-3">
+            <span class="text-white font-serif font-bold text-xl">G</span>
           </div>
+          <span class="font-serif font-bold text-xl text-greenstreet-900 tracking-tight">GREENSTREET</span>
+        </div>
+
+        <div class="hidden md:flex space-x-8 items-center">
+          <button onclick="scrollToSection('buyers')"
+            class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
+            Home Buyers
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
+          <button onclick="scrollToSection('sellers')"
+            class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
+            Lot Sellers
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
+          <button onclick="window.switchView('listings')"
+            class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
+            Inventory
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
+          <button onclick="scrollToSection('contact')"
+            class="text-gray-600 hover:text-greenstreet-600 font-medium transition-colors relative group">
+            Contact
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-greenstreet-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
+          <button onclick="window.switchView('listings')"
+            class="bg-greenstreet-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-greenstreet-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+            Find a Home
+          </button>
+        </div>
+
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <i data-lucide="menu"></i>
+          </button>
         </div>
       </div>
+    </div>
 
-      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-lg">
-        <div class="px-4 pt-2 pb-6 space-y-2">
-          <button onclick="scrollToSection('buyers')" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Home Buyers</button>
-          <button onclick="scrollToSection('sellers')" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Lot Sellers</button>
-          <button onclick="window.switchView('listings')" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Inventory</button>
-          <button onclick="scrollToSection('contact')" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Contact</button>
-          <button onclick="window.switchView('listings')" class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Find a Home</button>
-        </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-lg">
+      <div class="px-4 pt-2 pb-6 space-y-2">
+        <button onclick="scrollToSection('buyers')"
+          class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Home
+          Buyers</button>
+        <button onclick="scrollToSection('sellers')"
+          class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Lot
+          Sellers</button>
+        <button onclick="window.switchView('listings')"
+          class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Inventory</button>
+        <button onclick="scrollToSection('contact')"
+          class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Contact</button>
+        <button onclick="window.switchView('listings')"
+          class="block w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:bg-greenstreet-50 rounded-lg transition-colors">Find
+          a Home</button>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <main id="main-content">
-      
-      <div id="landing-view" class="view-container">
-        <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-40 overflow-hidden bg-greenstreet-50">
-          <div class="absolute inset-0 z-0 lg:hidden">
-            <img src="images/Green Street Builders House.png" alt="Background Home" class="w-full h-full object-cover opacity-10">
-          </div>
+  <main id="main-content">
 
-          <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')]"></div>
-          
-          <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-greenstreet-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-          <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-greenstreet-300 rounded-full blur-3xl opacity-30 animate-pulse" style="animation-delay: 1s;"></div>
-          
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div class="text-left max-w-2xl mx-auto lg:mx-0">
-                <div class="hero-animate">
-                  <span class="inline-block py-1.5 px-4 rounded-full bg-greenstreet-100/80 backdrop-blur-sm border border-greenstreet-200 text-greenstreet-700 text-xs font-bold tracking-wide uppercase mb-6 shadow-sm">
-                      Establishment • Quality • Speed
-                  </span>
-                </div>
-                <h1 id="hero-headline" class="hero-animate hero-delay-1 text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 leading-tight mb-6">
-                  </h1>
-                <p id="hero-subheadline" class="hero-animate hero-delay-2 text-xl text-gray-600 mb-10 leading-relaxed">
-                  </p>
-                <div class="hero-animate hero-delay-3 flex flex-col sm:flex-row items-center justify-start gap-4">
-                  <button onclick="window.switchView('listings')" class="w-full sm:w-auto px-8 py-4 bg-greenstreet-600 text-white rounded-lg font-semibold text-lg hover:bg-greenstreet-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <span id="hero-cta-primary">Find Your New Home Now</span> <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                  </button>
-                  <button onclick="scrollToSection('sellers')" class="w-full sm:w-auto px-8 py-4 bg-white text-greenstreet-800 border-2 border-greenstreet-100 rounded-lg font-semibold text-lg hover:border-greenstreet-600 hover:bg-greenstreet-50 transition-all duration-300 flex items-center justify-center gap-2 hover:-translate-y-1">
-                    <span id="hero-cta-secondary">Sell Your Vacant Lot for Cash</span>
-                  </button>
-                </div>
+    <div id="landing-view" class="view-container">
+      <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-40 overflow-hidden bg-greenstreet-50">
+        <div class="absolute inset-0 z-0 lg:hidden">
+          <img src="images/Green Street Builders House.png" alt="Background Home"
+            class="w-full h-full object-cover opacity-10">
+        </div>
+
+        <div
+          class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')]">
+        </div>
+
+        <div
+          class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-greenstreet-200 rounded-full blur-3xl opacity-30 animate-pulse">
+        </div>
+        <div
+          class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-greenstreet-300 rounded-full blur-3xl opacity-30 animate-pulse"
+          style="animation-delay: 1s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="text-left max-w-2xl mx-auto lg:mx-0">
+              <div class="hero-animate">
+                <span
+                  class="inline-block py-1.5 px-4 rounded-full bg-greenstreet-100/80 backdrop-blur-sm border border-greenstreet-200 text-greenstreet-700 text-xs font-bold tracking-wide uppercase mb-6 shadow-sm">
+                  Establishment • Quality • Speed
+                </span>
               </div>
-              
-              <div class="hidden lg:block hero-animate hero-delay-2">
-                <div class="relative">
-                  <div class="absolute -inset-4 bg-greenstreet-200/50 rounded-3xl blur-2xl"></div>
-                  <img src="images/Green Street Builders House.png" alt="Greenstreet Builders Featured House" class="relative rounded-2xl shadow-2xl border-4 border-white object-cover w-full h-[500px] hover:scale-[1.02] transition-transform duration-500">
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="py-24 bg-white">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal-on-scroll">
-              <h2 id="props-headline" class="text-3xl font-serif font-bold text-gray-900 mb-4">The Greenstreet Difference</h2>
-              <p id="props-subheadline" class="text-lg text-gray-600 max-w-2xl mx-auto">Why homeowners and land sellers trust us.</p>
-            </div>
-            <div id="props-grid" class="grid md:grid-cols-3 gap-8">
-              </div>
-          </div>
-        </section>
-
-        <section id="buyers" class="py-24 bg-gray-50 overflow-hidden">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-              <div class="mb-12 lg:mb-0 reveal-on-scroll">
-                <div class="relative">
-                    <div class="absolute -inset-4 bg-greenstreet-100 rounded-2xl transform rotate-2"></div>
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Modern Infill Home" class="relative rounded-2xl shadow-2xl object-cover h-full w-full hover:scale-[1.01] transition-transform duration-700">
-                </div>
-              </div>
-              <div class="reveal-on-scroll delay-200">
-                <div class="inline-flex items-center gap-2 text-greenstreet-600 font-bold tracking-wide uppercase text-sm mb-4">
-                  <i data-lucide="home" class="w-4 h-4"></i> <span>For Home Buyers</span>
-                </div>
-                <h2 id="buyer-headline" class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">New Construction, No Compromise</h2>
-                <p id="buyer-subheadline" class="text-lg text-gray-600 mb-8 leading-relaxed">
-                  Skip the design headaches and construction delays. Our production model delivers optimized floor plans and premium finishes at an unbeatable value.
-                </p>
-                
-                <div id="buyer-points" class="space-y-4 mb-10">
-                  </div>
-
-                <div class="bg-white p-6 rounded-xl border border-gray-100 mb-8 shadow-sm">
-                    <h4 class="font-bold text-gray-900 mb-4 border-b pb-2">Simple 3-Step Process</h4>
-                    <div class="flex justify-between text-sm text-center">
-                       <div class="flex-1 px-2">
-                           <div class="font-bold text-greenstreet-600 text-lg mb-1">01</div>
-                           <div class="leading-tight text-gray-600">Choose Lot & Plan</div>
-                       </div>
-                       <div class="flex-1 px-2 border-l">
-                           <div class="font-bold text-greenstreet-600 text-lg mb-1">02</div>
-                           <div class="leading-tight text-gray-600">Select Finishes</div>
-                       </div>
-                       <div class="flex-1 px-2 border-l">
-                           <div class="font-bold text-greenstreet-600 text-lg mb-1">03</div>
-                           <div class="leading-tight text-gray-600">Close & Move In</div>
-                       </div>
-                    </div>
-                </div>
-
-                <button id="buyer-cta" onclick="window.switchView('listings')" class="px-8 py-3 bg-greenstreet-800 text-white rounded-lg font-semibold hover:bg-greenstreet-900 transition-all duration-300 shadow-md hover:shadow-lg w-full sm:w-auto hover:-translate-y-0.5">
-                  See Current Available Homes
+              <h1 id="hero-headline"
+                class="hero-animate hero-delay-1 text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 leading-tight mb-6">
+              </h1>
+              <p id="hero-subheadline" class="hero-animate hero-delay-2 text-xl text-gray-600 mb-10 leading-relaxed">
+              </p>
+              <div class="hero-animate hero-delay-3 flex flex-col sm:flex-row items-center justify-start gap-4">
+                <button onclick="window.switchView('listings')"
+                  class="w-full sm:w-auto px-8 py-4 bg-greenstreet-600 text-white rounded-lg font-semibold text-lg hover:bg-greenstreet-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
+                  <span id="hero-cta-primary">Find Your New Home Now</span> <i data-lucide="arrow-right"
+                    class="w-5 h-5"></i>
+                </button>
+                <button onclick="scrollToSection('sellers')"
+                  class="w-full sm:w-auto px-8 py-4 bg-white text-greenstreet-800 border-2 border-greenstreet-100 rounded-lg font-semibold text-lg hover:border-greenstreet-600 hover:bg-greenstreet-50 transition-all duration-300 flex items-center justify-center gap-2 hover:-translate-y-1">
+                  <span id="hero-cta-secondary">Sell Your Vacant Lot for Cash</span>
                 </button>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section id="sellers" class="py-24 bg-greenstreet-900 text-white relative overflow-hidden">
-          <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
-              <div class="mb-12 lg:mb-0 reveal-on-scroll">
-                <div class="inline-flex items-center gap-2 text-greenstreet-300 font-bold tracking-wide uppercase text-sm mb-4">
-                  <i data-lucide="dollar-sign" class="w-4 h-4"></i> <span>Acquisition</span>
-                </div>
-                <h2 id="seller-headline" class="text-3xl md:text-4xl font-serif font-bold mb-6">We Buy Vacant Lots for Cash</h2>
-                <p id="seller-subheadline" class="text-lg text-greenstreet-100 mb-8 leading-relaxed opacity-90">
-                  Turn your unused land into liquid assets. We offer a streamlined, commission-free process for lot owners.
-                </p>
-
-                <div id="seller-points" class="space-y-6 mb-10">
-                   </div>
-                
-                <div class="flex gap-4">
-                    <div class="hidden lg:block w-px bg-greenstreet-700 h-24"></div>
-                    <div>
-                        <h4 class="font-bold text-greenstreet-200 mb-2">The Seller's Simple Process</h4>
-                        <ol class="text-sm text-greenstreet-100 space-y-1 list-decimal list-inside">
-                            <li>Submit Property Details</li>
-                            <li>Receive Cash Offer</li>
-                            <li>Title Review</li>
-                            <li>Quick Closing</li>
-                        </ol>
-                    </div>
-                </div>
-
-              </div>
-              
-              <div class="bg-white text-gray-900 p-8 rounded-2xl shadow-2xl reveal-on-scroll delay-200">
-                <h3 class="text-2xl font-bold mb-2">Get Your Offer</h3>
-                <p class="text-gray-500 mb-6 text-sm">Fill out the form below. Your privacy is guaranteed.</p>
-                
-                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you! A representative will contact you shortly.')">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Property Address</label>
-                    <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200" placeholder="123 Main St" required />
-                  </div>
-                  <div class="grid grid-cols-2 gap-4">
-                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                        <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200" placeholder="John" />
-                     </div>
-                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                        <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200" placeholder="Doe" />
-                     </div>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200" placeholder="john@example.com" />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                    <input type="tel" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200" placeholder="(555) 123-4567" />
-                  </div>
-                  <button id="seller-cta" type="submit" class="w-full bg-greenstreet-600 text-white font-bold py-3.5 rounded-lg hover:bg-greenstreet-700 transition-all duration-200 shadow-md hover:shadow-lg mt-2 hover:-translate-y-0.5">
-                    Get Your Cash Offer Today
-                  </button>
-                </form>
+            <div class="hidden lg:block hero-animate hero-delay-2">
+              <div class="relative">
+                <div class="absolute -inset-4 bg-greenstreet-200/50 rounded-3xl blur-2xl"></div>
+                <img src="images/Green Street Builders House.png" alt="Greenstreet Builders Featured House"
+                  class="relative rounded-2xl shadow-2xl border-4 border-white object-cover w-full h-[500px] hover:scale-[1.02] transition-transform duration-500">
               </div>
             </div>
           </div>
-        </section>
-      </div> <div id="listings-view" class="hidden pt-28 pb-24 bg-gray-50 min-h-screen">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
-             <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
-                <button onclick="window.switchView('landing')" class="hover:text-greenstreet-600 flex items-center gap-1 transition-colors">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+        </div>
+      </section>
+
+      <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16 reveal-on-scroll">
+            <h2 id="props-headline" class="text-3xl font-serif font-bold text-gray-900 mb-4">The Greenstreet Difference
+            </h2>
+            <p id="props-subheadline" class="text-lg text-gray-600 max-w-2xl mx-auto">Why homeowners and land sellers
+              trust us.</p>
+          </div>
+          <div id="props-grid" class="grid md:grid-cols-3 gap-8">
+          </div>
+        </div>
+      </section>
+
+      <section id="buyers" class="py-24 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+            <div class="mb-12 lg:mb-0 reveal-on-scroll">
+              <div class="relative">
+                <div class="absolute -inset-4 bg-greenstreet-100 rounded-2xl transform rotate-2"></div>
+                <img src="images/Green Street Template Home.png" alt="Modern Infill Home"
+                  class="relative rounded-2xl shadow-2xl object-cover h-full w-full hover:scale-[1.01] transition-transform duration-700">
+              </div>
+            </div>
+            <div class="reveal-on-scroll delay-200">
+              <div
+                class="inline-flex items-center gap-2 text-greenstreet-600 font-bold tracking-wide uppercase text-sm mb-4">
+                <i data-lucide="home" class="w-4 h-4"></i> <span>For Home Buyers</span>
+              </div>
+              <h2 id="buyer-headline" class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">New
+                Construction, No Compromise</h2>
+              <p id="buyer-subheadline" class="text-lg text-gray-600 mb-8 leading-relaxed">
+                Skip the design headaches and construction delays. Our production model delivers optimized floor plans
+                and premium finishes at an unbeatable value.
+              </p>
+
+              <div id="buyer-points" class="space-y-4 mb-10">
+              </div>
+
+              <div class="bg-white p-6 rounded-xl border border-gray-100 mb-8 shadow-sm">
+                <h4 class="font-bold text-gray-900 mb-4 border-b pb-2">Simple 3-Step Process</h4>
+                <div class="flex justify-between text-sm text-center">
+                  <div class="flex-1 px-2">
+                    <div class="font-bold text-greenstreet-600 text-lg mb-1">01</div>
+                    <div class="leading-tight text-gray-600">Choose Lot & Plan</div>
+                  </div>
+                  <div class="flex-1 px-2 border-l">
+                    <div class="font-bold text-greenstreet-600 text-lg mb-1">02</div>
+                    <div class="leading-tight text-gray-600">Select Finishes</div>
+                  </div>
+                  <div class="flex-1 px-2 border-l">
+                    <div class="font-bold text-greenstreet-600 text-lg mb-1">03</div>
+                    <div class="leading-tight text-gray-600">Close & Move In</div>
+                  </div>
+                </div>
+              </div>
+
+              <button id="buyer-cta" onclick="window.switchView('listings')"
+                class="px-8 py-3 bg-greenstreet-800 text-white rounded-lg font-semibold hover:bg-greenstreet-900 transition-all duration-300 shadow-md hover:shadow-lg w-full sm:w-auto hover:-translate-y-0.5">
+                See Current Available Homes
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sellers" class="py-24 bg-greenstreet-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
+            <div class="mb-12 lg:mb-0 reveal-on-scroll">
+              <div
+                class="inline-flex items-center gap-2 text-greenstreet-300 font-bold tracking-wide uppercase text-sm mb-4">
+                <i data-lucide="dollar-sign" class="w-4 h-4"></i> <span>Acquisition</span>
+              </div>
+              <h2 id="seller-headline" class="text-3xl md:text-4xl font-serif font-bold mb-6">We Buy Vacant Lots for
+                Cash</h2>
+              <p id="seller-subheadline" class="text-lg text-greenstreet-100 mb-8 leading-relaxed opacity-90">
+                Turn your unused land into liquid assets. We offer a streamlined, commission-free process for lot
+                owners.
+              </p>
+
+              <div id="seller-points" class="space-y-6 mb-10">
+              </div>
+
+              <div class="flex gap-4">
+                <div class="hidden lg:block w-px bg-greenstreet-700 h-24"></div>
+                <div>
+                  <h4 class="font-bold text-greenstreet-200 mb-2">The Seller's Simple Process</h4>
+                  <ol class="text-sm text-greenstreet-100 space-y-1 list-decimal list-inside">
+                    <li>Submit Property Details</li>
+                    <li>Receive Cash Offer</li>
+                    <li>Title Review</li>
+                    <li>Quick Closing</li>
+                  </ol>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="bg-white text-gray-900 p-8 rounded-2xl shadow-2xl reveal-on-scroll delay-200">
+              <h3 class="text-2xl font-bold mb-2">Get Your Offer</h3>
+              <p class="text-gray-500 mb-6 text-sm">Fill out the form below. Your privacy is guaranteed.</p>
+
+              <form class="space-y-4"
+                onsubmit="event.preventDefault(); alert('Thank you! A representative will contact you shortly.')">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Property Address</label>
+                  <input type="text"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200"
+                    placeholder="123 Main St" required />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <input type="text"
+                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200"
+                      placeholder="John" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                    <input type="text"
+                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200"
+                      placeholder="Doe" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <input type="email"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200"
+                    placeholder="john@example.com" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                  <input type="tel"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-greenstreet-500 focus:border-transparent focus:outline-none focus:bg-white transition-all duration-200"
+                    placeholder="(555) 123-4567" />
+                </div>
+                <button id="seller-cta" type="submit"
+                  class="w-full bg-greenstreet-600 text-white font-bold py-3.5 rounded-lg hover:bg-greenstreet-700 transition-all duration-200 shadow-md hover:shadow-lg mt-2 hover:-translate-y-0.5">
+                  Get Your Cash Offer Today
                 </button>
-                <span>/</span>
-                <span class="text-gray-900 font-medium">Inventory</span>
-             </div>
-
-             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Current Inventory</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore our selection of move-in ready homes, properties under construction, and our library of buildable floor plans.</p>
-             </div>
-             
-             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="filterListings('all')" id="filter-all" class="filter-btn active px-6 py-2 rounded-full bg-greenstreet-600 text-white font-medium transition-all shadow-sm hover:shadow-md">All Properties</button>
-                <button onclick="filterListings('ready')" id="filter-ready" class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-all shadow-sm hover:shadow-md">Move-In Ready</button>
-                <button onclick="filterListings('construction')" id="filter-construction" class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-all shadow-sm hover:shadow-md">Under Construction</button>
-                <button onclick="filterListings('plan')" id="filter-plan" class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-all shadow-sm hover:shadow-md">Floor Plans</button>
-             </div>
-        
-             <div id="listings-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                </div>
-             
-             <div id="listings-empty" class="hidden text-center py-20">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
-                    <i data-lucide="search" class="w-8 h-8"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900">No properties found</h3>
-                <p class="text-gray-500">Try adjusting your filters.</p>
-             </div>
+              </form>
+            </div>
           </div>
-      </div>
-
-      <div id="detail-view" class="hidden pt-28 pb-24 bg-white min-h-screen">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
-               <button onclick="window.switchView('listings')" class="hover:text-greenstreet-600 flex items-center gap-1 transition-colors">
-                  <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Inventory
-               </button>
-               <span>/</span>
-               <span id="detail-breadcrumb-title" class="text-gray-900 font-medium">Property Details</span>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-12">
-               <div class="space-y-4">
-                  <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] group cursor-zoom-in">
-                     <img id="detail-main-image" src="" alt="Property" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                     <div id="detail-badge" class="absolute top-4 left-4 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm bg-white text-gray-900">
-                        Status
-                     </div>
-                  </div>
-                  <div class="grid grid-cols-4 gap-4" id="detail-gallery">
-                     </div>
-               </div>
-
-               <div>
-                  <h1 id="detail-title" class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mt-2 mb-2">Title</h1>
-                  <p id="detail-address" class="text-lg text-gray-600 mb-6 flex items-center gap-2">
-                     <i data-lucide="map-pin" class="w-5 h-5 text-greenstreet-500"></i> <span id="detail-address-text">Address</span>
-                  </p>
-                  <p id="detail-price" class="text-3xl font-bold text-greenstreet-700 mb-8">Price</p>
-
-                  <div class="grid grid-cols-3 gap-4 mb-8 border-y border-gray-100 py-6">
-                     <div class="text-center border-r border-gray-100 last:border-0">
-                        <i data-lucide="bed-double" class="w-6 h-6 text-greenstreet-500 mx-auto mb-2"></i>
-                        <span class="block font-bold text-gray-900 text-lg" id="detail-beds">-</span>
-                        <span class="text-xs text-gray-500 uppercase tracking-wide">Beds</span>
-                     </div>
-                     <div class="text-center border-r border-gray-100 last:border-0">
-                        <i data-lucide="bath" class="w-6 h-6 text-greenstreet-500 mx-auto mb-2"></i>
-                        <span class="block font-bold text-gray-900 text-lg" id="detail-baths">-</span>
-                        <span class="text-xs text-gray-500 uppercase tracking-wide">Baths</span>
-                     </div>
-                     <div class="text-center">
-                        <i data-lucide="ruler" class="w-6 h-6 text-greenstreet-500 mx-auto mb-2"></i>
-                        <span class="block font-bold text-gray-900 text-lg" id="detail-sqft">-</span>
-                        <span class="text-xs text-gray-500 uppercase tracking-wide">Sqft</span>
-                     </div>
-                  </div>
-
-                  <h3 class="font-bold text-gray-900 mb-3 text-lg">About this home</h3>
-                  <p id="detail-description" class="text-gray-600 leading-relaxed mb-8">
-                     Description goes here.
-                  </p>
-
-                  <h3 class="font-bold text-gray-900 mb-4 text-lg">Key Features</h3>
-                  <ul id="detail-features" class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 mb-10">
-                     </ul>
-
-                  <div class="bg-greenstreet-50 p-8 rounded-2xl border border-greenstreet-100 text-center">
-                     <h3 class="font-serif font-bold text-2xl text-gray-900 mb-2">Interested in this property?</h3>
-                     <p class="text-gray-600 mb-6">Schedule a private tour or request more information today.</p>
-                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                         <button onclick="alert('Inquiry sent! An agent will contact you shortly.')" class="px-8 py-3 bg-greenstreet-600 text-white rounded-lg font-bold hover:bg-greenstreet-700 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
-                            Request Info
-                         </button>
-                         <button class="px-8 py-3 bg-white text-greenstreet-700 border border-greenstreet-200 rounded-lg font-bold hover:bg-greenstreet-50 transition-colors">
-                            <i data-lucide="phone" class="w-4 h-4 inline-block mr-2"></i> (555) 867-5309
-                         </button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-    </main>
-
-    <footer id="contact" class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        </div>
+      </section>
+    </div>
+    <div id="listings-view" class="hidden pt-28 pb-24 bg-gray-50 min-h-screen">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-4 gap-8">
-          <div class="col-span-1 md:col-span-1">
-            <div class="flex items-center mb-4">
-              <div class="h-6 w-6 bg-greenstreet-500 rounded-sm mr-2 flex items-center justify-center">
-                <span class="text-white font-serif font-bold text-sm">G</span>
+
+        <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
+          <button onclick="window.switchView('landing')"
+            class="hover:text-greenstreet-600 flex items-center gap-1 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+          </button>
+          <span>/</span>
+          <span class="text-gray-900 font-medium">Inventory</span>
+        </div>
+
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Current Inventory</h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore our selection of move-in ready homes, properties
+            under construction, and our library of buildable floor plans.</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button onclick="filterListings('all')" id="filter-all"
+            class="filter-btn active px-6 py-2 rounded-full bg-greenstreet-600 text-white font-medium transition-all shadow-sm hover:shadow-md">All
+            Properties</button>
+          <button onclick="filterListings('ready')" id="filter-ready"
+            class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-all shadow-sm hover:shadow-md">Move-In
+            Ready</button>
+          <button onclick="filterListings('construction')" id="filter-construction"
+            class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-all shadow-sm hover:shadow-md">Under
+            Construction</button>
+          <button onclick="filterListings('plan')" id="filter-plan"
+            class="filter-btn px-6 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:bg-greenstreet-50 hover:border-greenstreet-200 font-medium transition-all shadow-sm hover:shadow-md">Floor
+            Plans</button>
+        </div>
+
+        <div id="listings-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+
+        <div id="listings-empty" class="hidden text-center py-20">
+          <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
+            <i data-lucide="search" class="w-8 h-8"></i>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900">No properties found</h3>
+          <p class="text-gray-500">Try adjusting your filters.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="detail-view" class="hidden pt-28 pb-24 bg-white min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 flex items-center gap-2 text-sm text-gray-500">
+          <button onclick="window.switchView('listings')"
+            class="hover:text-greenstreet-600 flex items-center gap-1 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Inventory
+          </button>
+          <span>/</span>
+          <span id="detail-breadcrumb-title" class="text-gray-900 font-medium">Property Details</span>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div class="space-y-4">
+            <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] group cursor-zoom-in">
+              <img id="detail-main-image" src="" alt="Property"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+              <div id="detail-badge"
+                class="absolute top-4 left-4 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm bg-white text-gray-900">
+                Status
               </div>
-              <span class="font-serif font-bold text-lg text-white tracking-tight">GREENSTREET</span>
             </div>
-            <p class="text-sm text-gray-400 mb-4">
-              Building the future in the neighborhoods you love. Professional, predictable, production home building.
+            <div class="grid grid-cols-4 gap-4" id="detail-gallery">
+            </div>
+          </div>
+
+          <div>
+            <h1 id="detail-title" class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mt-2 mb-2">Title</h1>
+            <p id="detail-address" class="text-lg text-gray-600 mb-6 flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-5 h-5 text-greenstreet-500"></i> <span
+                id="detail-address-text">Address</span>
             </p>
-            <div class="flex space-x-4">
-              <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-              <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-              <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            <p id="detail-price" class="text-3xl font-bold text-greenstreet-700 mb-8">Price</p>
+
+            <div class="grid grid-cols-3 gap-4 mb-8 border-y border-gray-100 py-6">
+              <div class="text-center border-r border-gray-100 last:border-0">
+                <i data-lucide="bed-double" class="w-6 h-6 text-greenstreet-500 mx-auto mb-2"></i>
+                <span class="block font-bold text-gray-900 text-lg" id="detail-beds">-</span>
+                <span class="text-xs text-gray-500 uppercase tracking-wide">Beds</span>
+              </div>
+              <div class="text-center border-r border-gray-100 last:border-0">
+                <i data-lucide="bath" class="w-6 h-6 text-greenstreet-500 mx-auto mb-2"></i>
+                <span class="block font-bold text-gray-900 text-lg" id="detail-baths">-</span>
+                <span class="text-xs text-gray-500 uppercase tracking-wide">Baths</span>
+              </div>
+              <div class="text-center">
+                <i data-lucide="ruler" class="w-6 h-6 text-greenstreet-500 mx-auto mb-2"></i>
+                <span class="block font-bold text-gray-900 text-lg" id="detail-sqft">-</span>
+                <span class="text-xs text-gray-500 uppercase tracking-wide">Sqft</span>
+              </div>
+            </div>
+
+            <h3 class="font-bold text-gray-900 mb-3 text-lg">About this home</h3>
+            <p id="detail-description" class="text-gray-600 leading-relaxed mb-8">
+              Description goes here.
+            </p>
+
+            <h3 class="font-bold text-gray-900 mb-4 text-lg">Key Features</h3>
+            <ul id="detail-features" class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 mb-10">
+            </ul>
+
+            <div class="bg-greenstreet-50 p-8 rounded-2xl border border-greenstreet-100 text-center">
+              <h3 class="font-serif font-bold text-2xl text-gray-900 mb-2">Interested in this property?</h3>
+              <p class="text-gray-600 mb-6">Schedule a private tour or request more information today.</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="alert('Inquiry sent! An agent will contact you shortly.')"
+                  class="px-8 py-3 bg-greenstreet-600 text-white rounded-lg font-bold hover:bg-greenstreet-700 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                  Request Info
+                </button>
+                <button
+                  class="px-8 py-3 bg-white text-greenstreet-700 border border-greenstreet-200 rounded-lg font-bold hover:bg-greenstreet-50 transition-colors">
+                  <i data-lucide="phone" class="w-4 h-4 inline-block mr-2"></i> (555) 867-5309
+                </button>
+              </div>
             </div>
           </div>
-          
-          <div>
-            <h4 class="text-white font-bold mb-4">Quick Links</h4>
-            <ul class="space-y-2 text-sm">
-              <li><button onclick="window.switchView('listings')" class="hover:text-greenstreet-400 transition-colors">Find a Home</button></li>
-              <li><button onclick="scrollToSection('sellers')" class="hover:text-greenstreet-400 transition-colors">Sell Your Lot</button></li>
-              <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Our Process</a></li>
-              <li><a href="#" class="hover:text-greenstreet-400 transition-colors">About Us</a></li>
-            </ul>
-          </div>
-
-           <div>
-            <h4 class="text-white font-bold mb-4">Legal</h4>
-            <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Terms of Service</a></li>
-              <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Accessibility</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-white font-bold mb-4">Contact</h4>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> 123 Builder Lane, City, ST 90210</li>
-              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> (555) 867-5309</li>
-              <li class="flex items-center gap-2"><div class="w-4 h-4 bg-greenstreet-500 rounded-full"></div> hello@greenstreet.com</li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-xs text-gray-500">
-          &copy; <span id="year"></span> Greenstreet Builders. All rights reserved.
         </div>
       </div>
-    </footer>
+    </div>
+  </main>
 
-    <script type="module">
-        
-        const SectionType = {
-            HERO: 'HERO',
-            VALUE_PROPS: 'VALUE_PROPS',
-            BUYER: 'BUYER',
-            SELLER: 'SELLER'
-        };
+  <footer id="contact" class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="col-span-1 md:col-span-1">
+          <div class="flex items-center mb-4">
+            <div class="h-6 w-6 bg-greenstreet-500 rounded-sm mr-2 flex items-center justify-center">
+              <span class="text-white font-serif font-bold text-sm">G</span>
+            </div>
+            <span class="font-serif font-bold text-lg text-white tracking-tight">GREENSTREET</span>
+          </div>
+          <p class="text-sm text-gray-400 mb-4">
+            Building the future in the neighborhoods you love. Professional, predictable, production home building.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="instagram"
+                class="w-5 h-5"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="facebook"
+                class="w-5 h-5"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="linkedin"
+                class="w-5 h-5"></i></a>
+          </div>
+        </div>
 
-        const INITIAL_CONTENT = {
-            [SectionType.HERO]: {
-                headline: "Professional Infill Production: Connecting Lot Sellers with Home Buyers",
-                subheadline: "We bridge the gap between vacant land and modern living. Whether you are selling a lot for cash or seeking a high-quality production home in an established neighborhood, experience the professional Greenstreet advantage.",
-                ctaPrimary: "Browse Available Homes",
-                ctaSecondary: "Get a Cash Offer for Your Lot"
-            },
-            [SectionType.VALUE_PROPS]: {
-                headline: "The Greenstreet Difference",
-                subheadline: "Why homeowners and land sellers trust us.",
-                points: [
-                    "Quality Controlled Construction: Rigorous standards for every build.",
-                    "Predictable Pricing: No hidden costs, just exceptional value.",
-                    "Prime Locations: We build where you want to live."
-                ]
-            },
-            [SectionType.BUYER]: {
-                headline: "New Construction, No Compromise: Move-In Ready Homes",
-                subheadline: "Skip the design headaches and construction delays. Our production model delivers optimized floor plans and premium finishes at an unbeatable value.",
-                points: [
-                    "Predictable Costs & Timeline: Move in on time and on budget.",
-                    "Proven Floor Plans: Designs tested for modern living.",
-                    "Efficiency & Value: Bulk buying power passed directly to you."
-                ],
-                ctaPrimary: "See Current Available Homes & Floor Plans"
-            },
-            [SectionType.SELLER]: {
-                headline: "We Buy Vacant Lots for Cash: Get an Offer in 48 Hours",
-                subheadline: "Turn your unused land into liquid assets. We offer a streamlined, commission-free process for lot owners.",
-                points: [
-                    "Direct Cash Offer: Competitive pricing based on market value.",
-                    "We Buy As-Is: No clearing, grading, or repairs needed.",
-                    "Fast Closing: No agent commissions, no waiting."
-                ],
-                ctaPrimary: "Get Your Cash Offer Today"
-            }
-        };
+        <div>
+          <h4 class="text-white font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm">
+            <li><button onclick="window.switchView('listings')"
+                class="hover:text-greenstreet-400 transition-colors">Find a Home</button></li>
+            <li><button onclick="scrollToSection('sellers')" class="hover:text-greenstreet-400 transition-colors">Sell
+                Your Lot</button></li>
+            <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Our Process</a></li>
+            <li><a href="#" class="hover:text-greenstreet-400 transition-colors">About Us</a></li>
+          </ul>
+        </div>
 
-        // Mock Listings Data
-        const LISTINGS_DATA = [
-            {
-                id: 1,
-                type: 'ready',
-                title: '2405 Oak Street',
-                price: '$849,000',
-                address: 'Eastside Historic District',
-                beds: 4,
-                baths: 3.5,
-                sqft: 2850,
-                description: 'Stunning modern farmhouse with chefs kitchen and covered patio.',
-                fullDescription: 'Experience the perfect blend of historic charm and modern luxury in this stunning farmhouse. Located in the heart of the Eastside Historic District, this move-in ready home features a gourmet kitchen with quartz countertops, a spacious master suite with a spa-like bath, and a covered patio perfect for entertaining. Hardwood floors run throughout the main living areas, and the open-concept design maximizes natural light.',
-                features: ['Gourmet Chef\'s Kitchen', 'Covered Outdoor Patio', 'Spa-like Master Bath', 'Wide-plank Hardwood Floors', 'Energy Star Certified', '2-Car Attached Garage'],
-                image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                gallery: [
-                   'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                   'https://images.unsplash.com/photo-1484154218962-a1c002085d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                   'https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                   'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-                ],
-                badgeColor: 'bg-green-100 text-green-800'
-            },
-            {
-                id: 2,
-                type: 'plan',
-                title: 'The Boxwood',
-                price: 'Starts at $625,000',
-                address: 'To Be Built',
-                beds: 3,
-                baths: 2.5,
-                sqft: 2100,
-                description: 'Efficient open-concept living designed for narrow urban lots.',
-                fullDescription: 'The Boxwood is our solution for narrow urban infill lots without sacrificing style or functionality. This 3-bedroom, 2.5-bath plan features an intelligent vertical layout that separates living and sleeping zones. The main floor boasts 10-foot ceilings and large windows, creating an airy feel. Upstairs, the master retreat offers privacy and luxury.',
-                features: ['Optimized for Narrow Lots', '10ft Main Floor Ceilings', 'Open Concept Living/Dining', 'Large Walk-in Pantry', 'Second Floor Laundry', 'Optional Roof Deck'],
-                image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                gallery: [
-                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1502005229766-939cb4a5ea31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-                ],
-                badgeColor: 'bg-blue-100 text-blue-800'
-            },
-            {
-                id: 3,
-                type: 'construction',
-                title: '1289 Pine Avenue',
-                price: '$789,000',
-                address: 'North Hills',
-                beds: 4,
-                baths: 3,
-                sqft: 2600,
-                description: 'Completion due Nov 2024. Select your finishes now!',
-                fullDescription: 'Currently under construction in the sought-after North Hills neighborhood, this property offers a rare opportunity to customize your final finishes. With framing complete, you can still select tile, flooring, and cabinetry colors. The layout features a main-floor guest suite and a large bonus room upstairs. Don\'t miss your chance to put your personal touch on this Greenstreet home.',
-                features: ['Customization Available', 'Main Floor Guest Suite', 'Bonus Room', 'Quartz Countertops', 'Tankless Water Heater', 'Smart Home Wiring'],
-                image: 'https://images.unsplash.com/photo-1599809275311-5d67e0825618?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                gallery: [
-                    'https://images.unsplash.com/photo-1599809275311-5d67e0825618?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1531835551805-16d864c8d311?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1574621100236-d25a64a4aee8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-                ],
-                badgeColor: 'bg-orange-100 text-orange-800'
-            },
-            {
-                id: 4,
-                type: 'plan',
-                title: 'The Magnolia',
-                price: 'Starts at $750,000',
-                address: 'To Be Built',
-                beds: 5,
-                baths: 4,
-                sqft: 3200,
-                description: 'Our most spacious plan featuring a main-floor guest suite.',
-                fullDescription: 'The Magnolia is designed for families who need space and flexibility. This expansive floor plan includes a dedicated office, a formal dining room, and a massive great room that opens to the kitchen. The upstairs features a luxurious primary suite with dual walk-in closets and a sitting area. Perfect for wider city lots.',
-                features: ['5 Bedrooms / 4 Baths', 'Dedicated Home Office', 'Formal Dining Room', 'Dual Walk-in Closets', 'Mudroom with Lockers', 'Oversized Kitchen Island'],
-                image: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                gallery: [
-                    'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1484154218962-a1c002085d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-                ],
-                badgeColor: 'bg-blue-100 text-blue-800'
-            },
-            {
-                id: 5,
-                type: 'ready',
-                title: '882 Cedar Lane',
-                price: '$925,000',
-                address: 'Highland Park',
-                beds: 5,
-                baths: 4,
-                sqft: 3100,
-                description: 'Luxury finishes throughout, including a finished basement.',
-                fullDescription: 'Welcome to 882 Cedar Lane, a masterpiece of modern construction in Highland Park. This home spares no expense, featuring Wolf appliances, custom cabinetry, and white oak flooring. The finished basement adds a huge recreation room and an additional bedroom/bath suite. The backyard is fully landscaped and fenced, ready for summer BBQs.',
-                features: ['Finished Basement', 'Wolf Appliance Package', 'White Oak Flooring', 'Custom Cabinetry', 'Fully Landscaped Yard', 'Electric Car Charger'],
-                image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                gallery: [
-                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1600566752355-35792bedcfe1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-                ],
-                badgeColor: 'bg-green-100 text-green-800'
-            },
-            {
-                id: 6,
-                type: 'plan',
-                title: 'The Sycamore',
-                price: 'Starts at $595,000',
-                address: 'To Be Built',
-                beds: 3,
-                baths: 2,
-                sqft: 1800,
-                description: 'Perfect entry-level luxury for urban infill lots.',
-                fullDescription: 'The Sycamore proves that great things come in smaller packages. At 1800 sqft, this plan is efficient yet feels incredibly spacious due to its vaulted ceilings and clever storage solutions. It\'s the perfect entry point for those wanting new construction quality in an established neighborhood without the maintenance of a massive estate.',
-                features: ['Vaulted Great Room', 'Efficient Footprint', 'Designer Lighting Package', 'Large Front Porch', 'Low Maintenance Exterior', 'High Efficiency HVAC'],
-                image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                gallery: [
-                    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1593696140826-c58b09b6b952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-                    'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-                ],
-                badgeColor: 'bg-blue-100 text-blue-800'
-            }
-        ];
+        <div>
+          <h4 class="text-white font-bold mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-greenstreet-400 transition-colors">Accessibility</a></li>
+          </ul>
+        </div>
 
-        // --- State ---
-        let content = INITIAL_CONTENT;
+        <div>
+          <h4 class="text-white font-bold mb-4">Contact</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> 123 Builder Lane, City, ST
+              90210</li>
+            <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> (555) 867-5309</li>
+            <li class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-greenstreet-500 rounded-full"></div> hello@greenstreet.com
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-xs text-gray-500">
+        &copy; <span id="year"></span> Greenstreet Builders. All rights reserved.
+      </div>
+    </div>
+  </footer>
 
-        // --- Navigation Logic ---
-        window.switchView = (viewId) => {
-            const landing = document.getElementById('landing-view');
-            const listings = document.getElementById('listings-view');
-            const detail = document.getElementById('detail-view');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            if (mobileMenu) mobileMenu.classList.add('hidden');
+  <script type="module">
 
-            // Hide all first
-            landing.classList.add('hidden');
-            listings.classList.add('hidden');
-            detail.classList.add('hidden');
+    const SectionType = {
+      HERO: 'HERO',
+      VALUE_PROPS: 'VALUE_PROPS',
+      BUYER: 'BUYER',
+      SELLER: 'SELLER'
+    };
 
-            // Remove animation classes to reset
-            landing.classList.remove('view-container');
-            listings.classList.remove('view-container');
-            detail.classList.remove('view-container');
+    const INITIAL_CONTENT = {
+      [SectionType.HERO]: {
+        headline: "Professional Infill Production: Connecting Lot Sellers with Home Buyers",
+        subheadline: "We bridge the gap between vacant land and modern living. Whether you are selling a lot for cash or seeking a high-quality production home in an established neighborhood, experience the professional Greenstreet advantage.",
+        ctaPrimary: "Browse Available Homes",
+        ctaSecondary: "Get a Cash Offer for Your Lot"
+      },
+      [SectionType.VALUE_PROPS]: {
+        headline: "The Greenstreet Difference",
+        subheadline: "Why homeowners and land sellers trust us.",
+        points: [
+          "Quality Controlled Construction: Rigorous standards for every build.",
+          "Predictable Pricing: No hidden costs, just exceptional value.",
+          "Prime Locations: We build where you want to live."
+        ]
+      },
+      [SectionType.BUYER]: {
+        headline: "New Construction, No Compromise: Move-In Ready Homes",
+        subheadline: "Skip the design headaches and construction delays. Our production model delivers optimized floor plans and premium finishes at an unbeatable value.",
+        points: [
+          "Predictable Costs & Timeline: Move in on time and on budget.",
+          "Proven Floor Plans: Designs tested for modern living.",
+          "Efficiency & Value: Bulk buying power passed directly to you."
+        ],
+        ctaPrimary: "See Current Available Homes & Floor Plans"
+      },
+      [SectionType.SELLER]: {
+        headline: "We Buy Vacant Lots for Cash: Get an Offer in 48 Hours",
+        subheadline: "Turn your unused land into liquid assets. We offer a streamlined, commission-free process for lot owners.",
+        points: [
+          "Direct Cash Offer: Competitive pricing based on market value.",
+          "We Buy As-Is: No clearing, grading, or repairs needed.",
+          "Fast Closing: No agent commissions, no waiting."
+        ],
+        ctaPrimary: "Get Your Cash Offer Today"
+      }
+    };
 
-            // Force reflow
-            void landing.offsetWidth;
+    // Mock Listings Data
+    const LISTINGS_DATA = [
+      {
+        id: 1,
+        type: 'ready',
+        title: '2405 Oak Street',
+        price: '$849,000',
+        address: 'Eastside Historic District',
+        beds: 4,
+        baths: 3.5,
+        sqft: 2850,
+        description: 'Stunning modern farmhouse with chefs kitchen and covered patio.',
+        fullDescription: 'Experience the perfect blend of historic charm and modern luxury in this stunning farmhouse. Located in the heart of the Eastside Historic District, this move-in ready home features a gourmet kitchen with quartz countertops, a spacious master suite with a spa-like bath, and a covered patio perfect for entertaining. Hardwood floors run throughout the main living areas, and the open-concept design maximizes natural light.',
+        features: ['Gourmet Chef\'s Kitchen', 'Covered Outdoor Patio', 'Spa-like Master Bath', 'Wide-plank Hardwood Floors', 'Energy Star Certified', '2-Car Attached Garage'],
+        image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1484154218962-a1c002085d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+        ],
+        badgeColor: 'bg-green-100 text-green-800'
+      },
+      {
+        id: 2,
+        type: 'plan',
+        title: 'The Boxwood',
+        price: 'Starts at $625,000',
+        address: 'To Be Built',
+        beds: 3,
+        baths: 2.5,
+        sqft: 2100,
+        description: 'Efficient open-concept living designed for narrow urban lots.',
+        fullDescription: 'The Boxwood is our solution for narrow urban infill lots without sacrificing style or functionality. This 3-bedroom, 2.5-bath plan features an intelligent vertical layout that separates living and sleeping zones. The main floor boasts 10-foot ceilings and large windows, creating an airy feel. Upstairs, the master retreat offers privacy and luxury.',
+        features: ['Optimized for Narrow Lots', '10ft Main Floor Ceilings', 'Open Concept Living/Dining', 'Large Walk-in Pantry', 'Second Floor Laundry', 'Optional Roof Deck'],
+        image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1502005229766-939cb4a5ea31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+        ],
+        badgeColor: 'bg-blue-100 text-blue-800'
+      },
+      {
+        id: 3,
+        type: 'construction',
+        title: '1289 Pine Avenue',
+        price: '$789,000',
+        address: 'North Hills',
+        beds: 4,
+        baths: 3,
+        sqft: 2600,
+        description: 'Completion due Nov 2024. Select your finishes now!',
+        fullDescription: 'Currently under construction in the sought-after North Hills neighborhood, this property offers a rare opportunity to customize your final finishes. With framing complete, you can still select tile, flooring, and cabinetry colors. The layout features a main-floor guest suite and a large bonus room upstairs. Don\'t miss your chance to put your personal touch on this Greenstreet home.',
+        features: ['Customization Available', 'Main Floor Guest Suite', 'Bonus Room', 'Quartz Countertops', 'Tankless Water Heater', 'Smart Home Wiring'],
+        image: 'https://images.unsplash.com/photo-1599809275311-5d67e0825618?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1599809275311-5d67e0825618?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1531835551805-16d864c8d311?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1574621100236-d25a64a4aee8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+        ],
+        badgeColor: 'bg-orange-100 text-orange-800'
+      },
+      {
+        id: 4,
+        type: 'plan',
+        title: 'The Magnolia',
+        price: 'Starts at $750,000',
+        address: 'To Be Built',
+        beds: 5,
+        baths: 4,
+        sqft: 3200,
+        description: 'Our most spacious plan featuring a main-floor guest suite.',
+        fullDescription: 'The Magnolia is designed for families who need space and flexibility. This expansive floor plan includes a dedicated office, a formal dining room, and a massive great room that opens to the kitchen. The upstairs features a luxurious primary suite with dual walk-in closets and a sitting area. Perfect for wider city lots.',
+        features: ['5 Bedrooms / 4 Baths', 'Dedicated Home Office', 'Formal Dining Room', 'Dual Walk-in Closets', 'Mudroom with Lockers', 'Oversized Kitchen Island'],
+        image: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1484154218962-a1c002085d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+        ],
+        badgeColor: 'bg-blue-100 text-blue-800'
+      },
+      {
+        id: 5,
+        type: 'ready',
+        title: '882 Cedar Lane',
+        price: '$925,000',
+        address: 'Highland Park',
+        beds: 5,
+        baths: 4,
+        sqft: 3100,
+        description: 'Luxury finishes throughout, including a finished basement.',
+        fullDescription: 'Welcome to 882 Cedar Lane, a masterpiece of modern construction in Highland Park. This home spares no expense, featuring Wolf appliances, custom cabinetry, and white oak flooring. The finished basement adds a huge recreation room and an additional bedroom/bath suite. The backyard is fully landscaped and fenced, ready for summer BBQs.',
+        features: ['Finished Basement', 'Wolf Appliance Package', 'White Oak Flooring', 'Custom Cabinetry', 'Fully Landscaped Yard', 'Electric Car Charger'],
+        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1600566752355-35792bedcfe1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+        ],
+        badgeColor: 'bg-green-100 text-green-800'
+      },
+      {
+        id: 6,
+        type: 'plan',
+        title: 'The Sycamore',
+        price: 'Starts at $595,000',
+        address: 'To Be Built',
+        beds: 3,
+        baths: 2,
+        sqft: 1800,
+        description: 'Perfect entry-level luxury for urban infill lots.',
+        fullDescription: 'The Sycamore proves that great things come in smaller packages. At 1800 sqft, this plan is efficient yet feels incredibly spacious due to its vaulted ceilings and clever storage solutions. It\'s the perfect entry point for those wanting new construction quality in an established neighborhood without the maintenance of a massive estate.',
+        features: ['Vaulted Great Room', 'Efficient Footprint', 'Designer Lighting Package', 'Large Front Porch', 'Low Maintenance Exterior', 'High Efficiency HVAC'],
+        image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1593696140826-c58b09b6b952?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
+        ],
+        badgeColor: 'bg-blue-100 text-blue-800'
+      }
+    ];
 
-            if (viewId === 'listings') {
-                listings.classList.remove('hidden');
-                listings.classList.add('view-container');
-                renderListings('all'); 
-                window.scrollTo(0,0);
-            } else if (viewId === 'detail') {
-                detail.classList.remove('hidden');
-                detail.classList.add('view-container');
-                window.scrollTo(0,0);
-            } else {
-                landing.classList.remove('hidden');
-                landing.classList.add('view-container');
-                window.scrollTo(0,0);
-            }
-            
-            // Re-run icons
-            if (window.lucide) setTimeout(() => window.lucide.createIcons(), 50);
-        };
+    // --- State ---
+    let content = INITIAL_CONTENT;
 
-        window.scrollToSection = (id) => {
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) mobileMenu.classList.add('hidden');
-            
-            if (document.getElementById('landing-view').classList.contains('hidden')) {
-                window.switchView('landing');
-                setTimeout(() => {
-                    const el = document.getElementById(id);
-                    if(el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            } else {
-                const el = document.getElementById(id);
-                if(el) el.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
+    // --- Navigation Logic ---
+    window.switchView = (viewId) => {
+      const landing = document.getElementById('landing-view');
+      const listings = document.getElementById('listings-view');
+      const detail = document.getElementById('detail-view');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-        // --- Dynamic Navbar Logic ---
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 20) {
-                nav.classList.add('shadow-md', 'bg-white/95');
-                nav.classList.remove('border-transparent');
-                nav.classList.add('border-gray-100');
-            } else {
-                nav.classList.remove('shadow-md', 'bg-white/95');
-                nav.classList.add('border-transparent');
-                nav.classList.remove('border-gray-100');
-            }
-        });
+      if (mobileMenu) mobileMenu.classList.add('hidden');
 
-        // --- Scroll Reveal Logic ---
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-visible');
-                    observer.unobserve(entry.target); // Only animate once
-                }
-            });
-        }, observerOptions);
+      // Hide all first
+      landing.classList.add('hidden');
+      listings.classList.add('hidden');
+      detail.classList.add('hidden');
 
-        function initScrollAnimations() {
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
+      // Remove animation classes to reset
+      landing.classList.remove('view-container');
+      listings.classList.remove('view-container');
+      detail.classList.remove('view-container');
+
+      // Force reflow
+      void landing.offsetWidth;
+
+      if (viewId === 'listings') {
+        listings.classList.remove('hidden');
+        listings.classList.add('view-container');
+        renderListings('all');
+        window.scrollTo(0, 0);
+      } else if (viewId === 'detail') {
+        detail.classList.remove('hidden');
+        detail.classList.add('view-container');
+        window.scrollTo(0, 0);
+      } else {
+        landing.classList.remove('hidden');
+        landing.classList.add('view-container');
+        window.scrollTo(0, 0);
+      }
+
+      // Re-run icons
+      if (window.lucide) setTimeout(() => window.lucide.createIcons(), 50);
+    };
+
+    window.scrollToSection = (id) => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+
+      if (document.getElementById('landing-view').classList.contains('hidden')) {
+        window.switchView('landing');
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    // --- Dynamic Navbar Logic ---
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 20) {
+        nav.classList.add('shadow-md', 'bg-white/95');
+        nav.classList.remove('border-transparent');
+        nav.classList.add('border-gray-100');
+      } else {
+        nav.classList.remove('shadow-md', 'bg-white/95');
+        nav.classList.add('border-transparent');
+        nav.classList.remove('border-gray-100');
+      }
+    });
+
+    // --- Scroll Reveal Logic ---
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          observer.unobserve(entry.target); // Only animate once
         }
+      });
+    }, observerOptions);
 
-        // --- Listings Logic ---
-        window.filterListings = (filterType) => {
-            renderListings(filterType);
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-               if (btn.onclick.toString().includes(`'${filterType}'`)) {
-                   btn.classList.add('bg-greenstreet-600', 'text-white', 'border-transparent');
-                   btn.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
-               } else {
-                   btn.classList.remove('bg-greenstreet-600', 'text-white', 'border-transparent');
-                   btn.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
-               }
-            });
+    function initScrollAnimations() {
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // --- Listings Logic ---
+    window.filterListings = (filterType) => {
+      renderListings(filterType);
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.onclick.toString().includes(`'${filterType}'`)) {
+          btn.classList.add('bg-greenstreet-600', 'text-white', 'border-transparent');
+          btn.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
+        } else {
+          btn.classList.remove('bg-greenstreet-600', 'text-white', 'border-transparent');
+          btn.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
+        }
+      });
+    };
+
+    window.openListingDetail = (id) => {
+      const item = LISTINGS_DATA.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('detail-breadcrumb-title').textContent = item.title;
+      document.getElementById('detail-title').textContent = item.title;
+      document.getElementById('detail-address-text').textContent = item.address;
+      document.getElementById('detail-price').textContent = item.price;
+      document.getElementById('detail-beds').textContent = item.beds;
+      document.getElementById('detail-baths').textContent = item.baths;
+      document.getElementById('detail-sqft').textContent = item.sqft;
+      document.getElementById('detail-description').textContent = item.fullDescription || item.description;
+
+      document.getElementById('detail-main-image').src = item.image;
+
+      const badge = document.getElementById('detail-badge');
+      const typeLabel = item.type === 'ready' ? 'Move-In Ready' :
+        item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
+      badge.textContent = typeLabel;
+      badge.className = `absolute top-4 left-4 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm ${item.badgeColor}`;
+
+      const featuresList = document.getElementById('detail-features');
+      featuresList.innerHTML = '';
+      const featureItems = item.features || [];
+      featureItems.forEach(feat => {
+        const li = document.createElement('li');
+        li.className = "flex items-center gap-2 text-gray-700";
+        li.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-greenstreet-500"></i> ${feat}`;
+        featuresList.appendChild(li);
+      });
+
+      const galleryGrid = document.getElementById('detail-gallery');
+      galleryGrid.innerHTML = '';
+      const galleryItems = item.gallery || [item.image];
+      galleryItems.forEach((imgUrl, idx) => {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.className = "w-full h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-all border border-gray-100 hover:scale-105";
+        img.onclick = () => {
+          document.getElementById('detail-main-image').src = imgUrl;
+          document.getElementById('detail-main-image').parentElement.classList.remove('opacity-0');
+          // Add simple fade effect to main image could go here
         };
-        
-        window.openListingDetail = (id) => {
-            const item = LISTINGS_DATA.find(i => i.id === id);
-            if (!item) return;
+        galleryGrid.appendChild(img);
+      });
 
-            document.getElementById('detail-breadcrumb-title').textContent = item.title;
-            document.getElementById('detail-title').textContent = item.title;
-            document.getElementById('detail-address-text').textContent = item.address;
-            document.getElementById('detail-price').textContent = item.price;
-            document.getElementById('detail-beds').textContent = item.beds;
-            document.getElementById('detail-baths').textContent = item.baths;
-            document.getElementById('detail-sqft').textContent = item.sqft;
-            document.getElementById('detail-description').textContent = item.fullDescription || item.description;
-            
-            document.getElementById('detail-main-image').src = item.image;
-            
-            const badge = document.getElementById('detail-badge');
-            const typeLabel = item.type === 'ready' ? 'Move-In Ready' : 
-                                 item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
-            badge.textContent = typeLabel;
-            badge.className = `absolute top-4 left-4 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm ${item.badgeColor}`;
+      window.switchView('detail');
+    };
 
-            const featuresList = document.getElementById('detail-features');
-            featuresList.innerHTML = '';
-            const featureItems = item.features || [];
-            featureItems.forEach(feat => {
-                const li = document.createElement('li');
-                li.className = "flex items-center gap-2 text-gray-700";
-                li.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-greenstreet-500"></i> ${feat}`;
-                featuresList.appendChild(li);
-            });
+    function renderListings(filter) {
+      const grid = document.getElementById('listings-grid');
+      const emptyState = document.getElementById('listings-empty');
+      grid.innerHTML = '';
 
-            const galleryGrid = document.getElementById('detail-gallery');
-            galleryGrid.innerHTML = '';
-            const galleryItems = item.gallery || [item.image];
-            galleryItems.forEach((imgUrl, idx) => {
-                const img = document.createElement('img');
-                img.src = imgUrl;
-                img.className = "w-full h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-all border border-gray-100 hover:scale-105";
-                img.onclick = () => {
-                    document.getElementById('detail-main-image').src = imgUrl;
-                    document.getElementById('detail-main-image').parentElement.classList.remove('opacity-0'); 
-                    // Add simple fade effect to main image could go here
-                };
-                galleryGrid.appendChild(img);
-            });
+      const filtered = filter === 'all'
+        ? LISTINGS_DATA
+        : LISTINGS_DATA.filter(item => item.type === filter);
 
-            window.switchView('detail');
-        };
+      if (filtered.length === 0) {
+        grid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        return;
+      }
 
-        function renderListings(filter) {
-            const grid = document.getElementById('listings-grid');
-            const emptyState = document.getElementById('listings-empty');
-            grid.innerHTML = '';
-            
-            const filtered = filter === 'all' 
-                ? LISTINGS_DATA 
-                : LISTINGS_DATA.filter(item => item.type === filter);
-            
-            if (filtered.length === 0) {
-                grid.classList.add('hidden');
-                emptyState.classList.remove('hidden');
-                return;
-            }
+      grid.classList.remove('hidden');
+      emptyState.classList.add('hidden');
 
-            grid.classList.remove('hidden');
-            emptyState.classList.add('hidden');
+      filtered.forEach((item, index) => {
+        const typeLabel = item.type === 'ready' ? 'Move-In Ready' :
+          item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
 
-            filtered.forEach((item, index) => {
-                const typeLabel = item.type === 'ready' ? 'Move-In Ready' : 
-                                 item.type === 'plan' ? 'Floor Plan' : 'Under Construction';
-                
-                const card = document.createElement('div');
-                // Added fade-in animation to cards
-                card.style.animation = `fadeInUp 0.5s ease-out forwards ${index * 100}ms`;
-                card.style.opacity = '0'; // Initial state for animation
-                
-                card.className = "group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden hover:-translate-y-1";
-                card.innerHTML = `
+        const card = document.createElement('div');
+        // Added fade-in animation to cards
+        card.style.animation = `fadeInUp 0.5s ease-out forwards ${index * 100}ms`;
+        card.style.opacity = '0'; // Initial state for animation
+
+        card.className = "group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden hover:-translate-y-1";
+        card.innerHTML = `
                     <div class="relative h-64 overflow-hidden">
                         <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute top-4 left-4 ${item.badgeColor} text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide shadow-sm">
@@ -873,105 +998,106 @@
                         </button>
                     </div>
                 `;
-                grid.appendChild(card);
-            });
-            
-            if (window.lucide) window.lucide.createIcons();
-        }
+        grid.appendChild(card);
+      });
 
-        function renderAllContent() {
-            // Restore content injection logic
-            
-            // Hero
-            const heroHeadline = document.getElementById('hero-headline');
-            if(heroHeadline) heroHeadline.textContent = content.HERO.headline;
-            
-            const heroSub = document.getElementById('hero-subheadline');
-            if(heroSub) heroSub.textContent = content.HERO.subheadline;
-            
-            const heroCta1 = document.getElementById('hero-cta-primary');
-            if(heroCta1) heroCta1.textContent = content.HERO.ctaPrimary;
+      if (window.lucide) window.lucide.createIcons();
+    }
 
-            const heroCta2 = document.getElementById('hero-cta-secondary');
-            if(heroCta2) heroCta2.textContent = content.HERO.ctaSecondary;
+    function renderAllContent() {
+      // Restore content injection logic
 
-            // Value Props
-            document.getElementById('props-headline').textContent = content.VALUE_PROPS.headline;
-            document.getElementById('props-subheadline').textContent = content.VALUE_PROPS.subheadline;
-            const propsGrid = document.getElementById('props-grid');
-            propsGrid.innerHTML = '';
-            const icons = ['check-circle-2', 'dollar-sign', 'map-pin'];
-            content.VALUE_PROPS.points.forEach((point, index) => {
-                const iconName = icons[index % icons.length];
-                const parts = point.split(':');
-                const title = parts[0];
-                const desc = parts[1] || point;
-                const div = document.createElement('div');
-                div.className = `p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 reveal-on-scroll delay-${(index+1)*100}`;
-                div.innerHTML = `
+      // Hero
+      const heroHeadline = document.getElementById('hero-headline');
+      if (heroHeadline) heroHeadline.textContent = content.HERO.headline;
+
+      const heroSub = document.getElementById('hero-subheadline');
+      if (heroSub) heroSub.textContent = content.HERO.subheadline;
+
+      const heroCta1 = document.getElementById('hero-cta-primary');
+      if (heroCta1) heroCta1.textContent = content.HERO.ctaPrimary;
+
+      const heroCta2 = document.getElementById('hero-cta-secondary');
+      if (heroCta2) heroCta2.textContent = content.HERO.ctaSecondary;
+
+      // Value Props
+      document.getElementById('props-headline').textContent = content.VALUE_PROPS.headline;
+      document.getElementById('props-subheadline').textContent = content.VALUE_PROPS.subheadline;
+      const propsGrid = document.getElementById('props-grid');
+      propsGrid.innerHTML = '';
+      const icons = ['check-circle-2', 'dollar-sign', 'map-pin'];
+      content.VALUE_PROPS.points.forEach((point, index) => {
+        const iconName = icons[index % icons.length];
+        const parts = point.split(':');
+        const title = parts[0];
+        const desc = parts[1] || point;
+        const div = document.createElement('div');
+        div.className = `p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 reveal-on-scroll delay-${(index + 1) * 100}`;
+        div.innerHTML = `
                     <div class="w-14 h-14 bg-greenstreet-100 rounded-xl flex items-center justify-center text-greenstreet-600 mb-6 shadow-inner">
                        <i data-lucide="${iconName}" class="w-7 h-7"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">${title}</h3>
                     <p class="text-gray-600 leading-relaxed">${desc}</p>
                 `;
-                propsGrid.appendChild(div);
-            });
+        propsGrid.appendChild(div);
+      });
 
-            // Buyer
-            document.getElementById('buyer-headline').textContent = content.BUYER.headline;
-            document.getElementById('buyer-subheadline').textContent = content.BUYER.subheadline;
-            document.getElementById('buyer-cta').textContent = content.BUYER.ctaPrimary;
-            const buyerPoints = document.getElementById('buyer-points');
-            buyerPoints.innerHTML = '';
-            content.BUYER.points.forEach(point => {
-                const div = document.createElement('div');
-                div.className = "flex items-start gap-3";
-                div.innerHTML = `
+      // Buyer
+      document.getElementById('buyer-headline').textContent = content.BUYER.headline;
+      document.getElementById('buyer-subheadline').textContent = content.BUYER.subheadline;
+      document.getElementById('buyer-cta').textContent = content.BUYER.ctaPrimary;
+      const buyerPoints = document.getElementById('buyer-points');
+      buyerPoints.innerHTML = '';
+      content.BUYER.points.forEach(point => {
+        const div = document.createElement('div');
+        div.className = "flex items-start gap-3";
+        div.innerHTML = `
                     <div class="mt-1 min-w-[20px]">
                       <i data-lucide="check-circle-2" class="w-5 h-5 text-greenstreet-500"></i>
                     </div>
                     <span class="text-gray-700 font-medium">${point}</span>
                 `;
-                buyerPoints.appendChild(div);
-            });
+        buyerPoints.appendChild(div);
+      });
 
-            // Seller
-            document.getElementById('seller-headline').textContent = content.SELLER.headline;
-            document.getElementById('seller-subheadline').textContent = content.SELLER.subheadline;
-            document.getElementById('seller-cta').textContent = content.SELLER.ctaPrimary;
-            const sellerPoints = document.getElementById('seller-points');
-            sellerPoints.innerHTML = '';
-            content.SELLER.points.forEach(point => {
-                const div = document.createElement('div');
-                div.className = "flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors cursor-default";
-                div.innerHTML = `
+      // Seller
+      document.getElementById('seller-headline').textContent = content.SELLER.headline;
+      document.getElementById('seller-subheadline').textContent = content.SELLER.subheadline;
+      document.getElementById('seller-cta').textContent = content.SELLER.ctaPrimary;
+      const sellerPoints = document.getElementById('seller-points');
+      sellerPoints.innerHTML = '';
+      content.SELLER.points.forEach(point => {
+        const div = document.createElement('div');
+        div.className = "flex items-center gap-4 p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors cursor-default";
+        div.innerHTML = `
                     <div class="bg-greenstreet-500 p-2 rounded-full shadow-lg">
                         <i data-lucide="check-circle-2" class="w-5 h-5 text-white"></i>
                     </div>
                     <span class="font-medium text-lg">${point}</span>
                 `;
-                sellerPoints.appendChild(div);
-            });
+        sellerPoints.appendChild(div);
+      });
 
-            // Init scroll animations
-            setTimeout(initScrollAnimations, 100);
-            
-            // Footer Year
-            const yearEl = document.getElementById('year');
-            if (yearEl) yearEl.textContent = new Date().getFullYear();
+      // Init scroll animations
+      setTimeout(initScrollAnimations, 100);
 
-            // Refresh Icons
-            if (window.lucide) window.lucide.createIcons();
-        }
+      // Footer Year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-        document.getElementById('mobile-menu-btn').onclick = () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        };
+      // Refresh Icons
+      if (window.lucide) window.lucide.createIcons();
+    }
 
-        // --- Initialization ---
-        renderAllContent();
+    document.getElementById('mobile-menu-btn').onclick = () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    };
 
-    </script>
-  </body>
+    // --- Initialization ---
+    renderAllContent();
+
+  </script>
+</body>
+
 </html>
